@@ -1,3 +1,9 @@
 from django.db import models
 
-# Create your models here.
+
+class Task(models.Model):
+    task_title = models.TextField('Текст задачи')
+    task_complete = models.BooleanField('Состояние')
+
+    def __str__(self):
+        return self.task_title
