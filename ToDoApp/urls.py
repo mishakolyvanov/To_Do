@@ -1,3 +1,4 @@
+# from django.contrib.auth.views import LoginView
 from django.urls import path
 from . import views
 
@@ -8,4 +9,5 @@ urlpatterns = [
     path('MyToDo/uncross/<task_id>', views.uncross, name='uncross'),
     path('MyToDo/delete/<task_id>', views.delete, name='delete'),
     path('MyToDo/edit/<task_id>', views.edit, name='edit'),
+    # path('login', LoginView.as_view(), name='login'),
 ]

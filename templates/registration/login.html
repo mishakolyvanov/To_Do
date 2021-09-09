@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<body>
+    <h3>Login</h3>
+<div>
+  <form method="POST" action="{% url 'login' %}">
+    {% csrf_token %}
+    {{ form.username.label_tag }}
+    {{ form.username }}
+
+    {{ form.password.label_tag }}
+    {{ form.password }}
+    {{ form.errors }}
+    <input type="submit" value="Login">
+  </form>
+</div>
+</body>
+</html>
+
+{% endblock %}
