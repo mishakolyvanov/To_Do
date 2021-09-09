@@ -9,19 +9,32 @@
         {% csrf_token %}
         {{ form.task_title }}
         <button type="submit">Добавить</button>
+        <br>
     </form>
 
-    {% if tasks %}
-        {% for item in tasks %}
-            <tr>
-                {{ item.task_title }}<br>
-            </tr>
-        {% endfor %}
-    {% else %}
-        Заметки не найдены
-    {% endif %}
+        {% if tasks %}
+            {% for item in tasks %}
+                {% if item.task_complete %}
+
+                    <tr>
+                        <a href="{% url 'ToDoApp:uncross' item.id %}">Uncross</a>
+{#                        {{ form.task_complete }}#}
+                        {{ item.task_title }}
+                        <a href="{% url 'ToDoApp:delete' item.id %}">Delete</a><br>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <a href="{% url 'ToDoApp:cross_off' item.id %}">Cross off</a>
+{#                        {{ form.task_complete }}#}
+                        {{ item.task_title }}
+                        <a href="{% url 'ToDoApp:delete' item.id %}">Delete</a><br>
+
+                    </tr>
+                {% endif %}
+
+            {% endfor %}
+        {% else %}
+            Заметки не найдены
+        {% endif %}
 
 {% endblock %}
-
-
-{#        <input class="form-check-input" type="checkbox">#}

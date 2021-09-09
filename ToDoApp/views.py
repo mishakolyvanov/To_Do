@@ -6,8 +6,6 @@ from .models import Task
 
 def index(request):
     tasks = Task.objects.all()
-
-# def create_task(request):
     error = ''
     if request.method == 'POST':
         form = TaskForm(request.POST)
@@ -24,3 +22,23 @@ def index(request):
         'tasks': tasks
     }
     return render(request, 'MyToDo.html', context)
+
+
+def cross_off(request, task_id):
+    task_title = Task.objects.get(pk=task_id)
+    task_title.task_complete = True
+    task_title.save()
+    return redirect('ToDoApp:index')
+
+
+def uncross(request, task_id):
+    task_title = Task.objects.get(pk=task_id)
+    task_title.task_complete = False
+    task_title.save()
+    return redirect('ToDoApp:index')
+
+
+def delete(request, task_id):
+    task_title = Task.objects.get(pk=task_id)
+    task_title.delete()
+    return redirect('ToDoApp:index')
