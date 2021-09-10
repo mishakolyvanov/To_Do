@@ -3,8 +3,9 @@
 {% block title %}{% endblock %}
 
 {% block content %}
-    <h3>Edit To Do</h3>
 
+    {% if user.is_authenticated %}
+    <h3>Edit To Do</h3>
     <form method="post">
         {% csrf_token %}
         {{ form.task_complete }}
@@ -12,4 +13,7 @@
         <button type="submit">Сохранить</button>
         <br>
     </form>
+    {% else %}
+        Зайдите пожалуйста
+    {% endif %}
 {% endblock %}

@@ -3,18 +3,13 @@
 {% block title %}{% endblock %}
 
 {% block content %}
-    <h3>Мои To Do</h3>
+    <h3>{{ header }}</h3>
 {% if user.is_authenticated %}
-    Привет {{ user.username }}
     <form method="post">
         {% csrf_token %}
         {{ form.task_title }}
-{#        {{ form.task_complete }}<br>#}
-{#        {{ form.task_author }}#}
         <button type="submit">Добавить</button>
         <br>
-
-
         {% if tasks %}
             {% for item in tasks %}
                 {% if item.task_complete %}

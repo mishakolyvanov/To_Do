@@ -3,9 +3,9 @@
 {% block title %}{% endblock %}
 
 {% block content %}
-    <h3>Users</h3>
+    <h3>{{ header }}</h3>
 
-    {% for item in tasks %}
-        <a href="{% url 'ToDoApp:users_ToDo' item.task_author %}">{{ item.task_author }}</a><br>
+    {% for item in authors %}
+        <a href="{% url 'ToDoApp:users_ToDo' item %}">{{ item }}</a><br>
     {% endfor %}
 {% endblock %}

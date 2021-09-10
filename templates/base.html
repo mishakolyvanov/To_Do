@@ -23,6 +23,7 @@
         </ul>
 
         {% if user.is_authenticated %}
+            Привет {{ user.username }}
             <ul class="nav navbar-nav navbar-right">
                 <li><<a href="{% url 'logout' %}">Logout</a></li>
             </ul>

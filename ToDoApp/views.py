@@ -1,10 +1,12 @@
+from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from .forms import TaskForm
 from .models import Task
 
 
 def index(request):
-    tasks = Task.objects.all()
+    tasks = Task.objects.filter(task_author__username=request.user)
     error = ''
     if request.method == 'POST':
         form = TaskForm(request.POST)
@@ -20,11 +22,13 @@ def index(request):
     context = {
         'form': form,
         'error': error,
-        'tasks': tasks
+        'tasks': tasks,
+        'header': 'My To Do'
     }
     return render(request, 'MyToDo.html', context)
 
 
+@login_required
 def cross_off(request, task_id):
     task_title = Task.objects.get(pk=task_id)
     task_title.task_complete = True
@@ -32,6 +36,7 @@ def cross_off(request, task_id):
     return redirect('ToDoApp:index')
 
 
+@login_required
 def uncross(request, task_id):
     task_title = Task.objects.get(pk=task_id)
     task_title.task_complete = False
@@ -39,6 +44,7 @@ def uncross(request, task_id):
     return redirect('ToDoApp:index')
 
 
+@login_required
 def delete(request, task_id):
     task_title = Task.objects.get(pk=task_id)
     task_title.delete()
@@ -54,32 +60,30 @@ def edit(request, task_id):
             form.save()
             return redirect('ToDoApp:index')
         else:
-            error = 'Форма неверна'
+            error = f'Ошибка в форме: {form.errors}'
     else:
         form = TaskForm(instance=tasks)
-
-    return render(request, 'EditToDo.html', {'form': form})
+        context = {
+            'form': form,
+            'error': error,
+        }
+    return render(request, 'EditToDo.html', context)
 
 
 def users(request):
-    tasks = Task.objects.all()
-    error = ''
-    form = TaskForm()
+    author = get_user_model()
+    authors = author.objects.all()
     context = {
-        'form': form,
-        'error': error,
-        'tasks': tasks
+        'authors': authors,
+        'header': 'Users'
     }
     return render(request, 'Users.html', context)
 
 
 def users_ToDo(request, user):
     tasks = Task.objects.filter(task_author__username=user)
-    error = ''
-    form = TaskForm()
     context = {
-        'form': form,
-        'error': error,
-        'tasks': tasks
+        'tasks': tasks,
+        'header': f'{user} To Do'
     }
-    return render(request, 'MyToDo.html', context)
+    return render(request, 'UserToDo.html', context)
