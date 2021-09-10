@@ -19,11 +19,19 @@
 
         <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a class="nav-link" href="{% url 'ToDoApp:index' %}">My To Do</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'ToDoApp:users' %}">Authors</a></li>
         </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Sign Up</a></li>
-            <li><<a href="{% url 'login' %}">Login</a></li>
-        </ul>
+
+        {% if user.is_authenticated %}
+            <ul class="nav navbar-nav navbar-right">
+                <li><<a href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+        {% else %}
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{% url 'AuthorizationApp:register' %}">Sign Up</a></li>
+                <li><<a href="{% url 'login' %}">Login</a></li>
+            </ul>
+        {% endif %}
     </div>
 </nav>
 

@@ -20,5 +20,6 @@ from django.urls import include, path
 urlpatterns = [
     path('ToDoApp/', include('ToDoApp.urls')),
     path('admin/', admin.site.urls),
-    path('login', LoginView.as_view(), name='login'),
+    path('AuthorizationApp/', include('django.contrib.auth.urls')),
+    path('AuthorizationApp/', include('AuthorizationApp.urls')),
 ]

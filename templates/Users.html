@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+    <h3>Users</h3>
+
+    {% for item in tasks %}
+        <a href="{% url 'ToDoApp:users_ToDo' item.task_author %}">{{ item.task_author }}</a><br>
+    {% endfor %}
+{% endblock %}

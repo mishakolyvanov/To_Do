@@ -4,10 +4,13 @@
 
 {% block content %}
     <h3>Мои To Do</h3>
-
+{% if user.is_authenticated %}
+    Привет {{ user.username }}
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form.task_title }}
+{#        {{ form.task_complete }}<br>#}
+{#        {{ form.task_author }}#}
         <button type="submit">Добавить</button>
         <br>
 
@@ -36,6 +39,9 @@
         {% else %}
             Заметки не найдены
         {% endif %}
-
     </form>
+{% else %}
+    Зайдите пожалуйста
+{% endif %}
+
 {% endblock %}

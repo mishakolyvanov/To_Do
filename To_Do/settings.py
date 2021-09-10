@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ToDoApp.apps.TodoappConfig',
+    'AuthorizationApp',
 ]
 
 MIDDLEWARE = [
@@ -126,4 +127,5 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = '/admin'
+LOGIN_REDIRECT_URL = '/ToDoApp/MyToDo'
+LOGOUT_REDIRECT_URL = '/ToDoApp/MyToDo'
