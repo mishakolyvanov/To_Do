@@ -30,25 +30,37 @@ def index(request):
 
 @login_required
 def cross_off(request, task_id):
-    task_title = Task.objects.get(pk=task_id)
-    task_title.task_complete = True
-    task_title.save()
-    return redirect('ToDoApp:index')
+    task = Task.objects.get(pk=task_id)
+    task_two = Task.objects.filter(task_author__username=request.user).first()
+    if task_two.task_author == task.task_author:
+        task.task_complete = True
+        task.save()
+        return redirect('ToDoApp:index')
+    else:
+        return redirect('ToDoApp:users')
 
 
 @login_required
 def uncross(request, task_id):
-    task_title = Task.objects.get(pk=task_id)
-    task_title.task_complete = False
-    task_title.save()
-    return redirect('ToDoApp:index')
+    task = Task.objects.get(pk=task_id)
+    task_two = Task.objects.filter(task_author__username=request.user).first()
+    if task_two.task_author == task.task_author:
+        task.task_complete = False
+        task.save()
+        return redirect('ToDoApp:index')
+    else:
+        return redirect('ToDoApp:users')
 
 
 @login_required
 def delete(request, task_id):
-    task_title = Task.objects.get(pk=task_id)
-    task_title.delete()
-    return redirect('ToDoApp:index')
+    task = Task.objects.get(pk=task_id)
+    task_two = Task.objects.filter(task_author__username=request.user).first()
+    if task_two.task_author == task.task_author:
+        task.delete()
+        return redirect('ToDoApp:index')
+    else:
+        return redirect('ToDoApp:users')
 
 
 def edit(request, task_id):

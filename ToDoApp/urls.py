@@ -8,6 +8,6 @@ urlpatterns = [
     path('MyToDo/uncross/<task_id>', views.uncross, name='uncross'),
     path('MyToDo/delete/<task_id>', views.delete, name='delete'),
     path('MyToDo/edit/<task_id>', views.edit, name='edit'),
-    path('MyToDo/authors', views.users, name='users'),
-    path('MyToDo/<str:user>/', views.users_ToDo, name='users_ToDo'),
+    path('ToDo/authors', views.users, name='users'),
+    path('ToDo/<str:user>/', views.users_ToDo, name='users_ToDo'),
 ]
