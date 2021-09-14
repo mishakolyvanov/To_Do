@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'ToDoApp.apps.TodoappConfig',
     'AuthorizationApp',
     'rest_framework',
-    'ApiApp'
+    'ApiApp',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [

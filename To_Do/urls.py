@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.contrib.auth.views import LoginView
 from django.urls import include, path
+from .yasg import urlpatterns as doc_urls
 
 urlpatterns = [
     path('ToDoApp/', include('ToDoApp.urls')),
@@ -24,3 +25,4 @@ urlpatterns = [
     path('AuthorizationApp/', include('AuthorizationApp.urls')),
     path('ApiApp/', include('ApiApp.urls')),
 ]
+urlpatterns += doc_urls
