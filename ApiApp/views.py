@@ -13,7 +13,7 @@ class UserList(generics.ListAPIView):
 
 class UserDetail(generics.RetrieveAPIView):
     queryset = User.objects.all()
-    serializer_class = serializers.UserSerializer
+    serializer_class = serializers.UserSerializerDetail
 
 
 class PostList(generics.ListCreateAPIView):
@@ -22,7 +22,7 @@ class PostList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+        serializer.save(task_author=self.request.user)
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
