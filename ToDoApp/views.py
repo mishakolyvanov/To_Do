@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
+from rest_framework.viewsets import ModelViewSet
+from ApiApp.serializers import TaskSerializer
 from .forms import TaskForm
 from .models import Task
 
@@ -99,3 +101,8 @@ def users_ToDo(request, user):
         'header': f'{user} To Do'
     }
     return render(request, 'UserToDo.html', context)
+
+
+class TaskViewSet(ModelViewSet):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
