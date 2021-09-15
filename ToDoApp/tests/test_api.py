@@ -2,7 +2,6 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
-
 from ApiApp.serializers import TaskSerializer
 from ToDoApp.models import Task
 
@@ -23,3 +22,9 @@ class TaskApiTestCase(APITestCase):
         self.client.login()
         response = self.client.get(url)
         self.assertEqual(200, response.status_code)
+
+    def test_post_not_authorization_negative(self):
+        url = reverse('task-list')
+        self.client.login()
+        response = self.client.post(url)
+        self.assertEqual(400, response.status_code)
