@@ -67,21 +67,25 @@ def delete(request, task_id):
 
 def edit(request, task_id):
     tasks = get_object_or_404(Task, pk=task_id)
-    error = ''
-    if request.method == 'POST':
-        form = TaskForm(request.POST, instance=tasks)
-        if form.is_valid():
-            form.save()
-            return redirect('ToDoApp:index')
+    task_two = Task.objects.filter(task_author__username=request.user).first()
+    if task_two.task_author == tasks.task_author:
+        error = ''
+        if request.method == 'POST':
+            form = TaskForm(request.POST, instance=tasks)
+            if form.is_valid():
+                form.save()
+                return redirect('ToDoApp:index')
+            else:
+                error = f'Ошибка в форме: {form.errors}'
         else:
-            error = f'Ошибка в форме: {form.errors}'
+            form = TaskForm(instance=tasks)
+            context = {
+                'form': form,
+                'error': error,
+            }
+        return render(request, 'EditToDo.html', context)
     else:
-        form = TaskForm(instance=tasks)
-        context = {
-            'form': form,
-            'error': error,
-        }
-    return render(request, 'EditToDo.html', context)
+        return redirect('ToDoApp:users')
 
 
 def users(request):

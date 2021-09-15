@@ -15,15 +15,13 @@
                 {% if item.task_complete %}
 
                     <tr>
-                        <a href="{% url 'ToDoApp:uncross' item.id %}">Закрыто</a>
-                        {{ item.task_title }}
+                        <a href="{% url 'ToDoApp:uncross' item.id %}"><s>{{ item.task_title }}</s></a>
                         <a href="{% url 'ToDoApp:delete' item.id %}">Delete</a>
                         <a href="{% url 'ToDoApp:edit' item.id %}">Edit</a><br>
                     </tr>
                 {% else %}
                     <tr>
-                        <a href="{% url 'ToDoApp:cross_off' item.id %}">Открыто</a>
-                        {{ item.task_title }}
+                        <a href="{% url 'ToDoApp:cross_off' item.id %}">{{ item.task_title }}</a>
                         <a href="{% url 'ToDoApp:delete' item.id %}">Delete</a>
                         <a href="{% url 'ToDoApp:edit' item.id %}">Edit</a><br>
 

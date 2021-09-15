@@ -8,12 +8,10 @@
             {% for item in tasks %}
                 {% if item.task_complete %}
                     <tr>
-                        <a>Закрыто</a>
-                        {{ item.task_title }}<br>
+                        <s>{{ item.task_title }}</s><br>
                     </tr>
                 {% else %}
                     <tr>
-                        <a>Открыто</a>
                         {{ item.task_title }}<br>
                     </tr>
                 {% endif %}
