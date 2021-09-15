@@ -4,7 +4,6 @@ from ToDoApp.models import Task
 
 
 class TaskModelTest(TestCase):
-
     def test_string_representation(self):
         task = Task(task_title="My task title")
         self.assertEqual(str(task), task.task_title)

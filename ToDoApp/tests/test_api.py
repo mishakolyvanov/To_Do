@@ -17,3 +17,9 @@ class TaskApiTestCase(APITestCase):
         serializer_data = TaskSerializer([task_1, task_2], many=True).data
         self.assertEqual(status.HTTP_200_OK, response.status_code)
         self.assertEqual(serializer_data, response.data)
+
+    def test_get_not_authorization(self):
+        url = reverse('task-list')
+        self.client.login()
+        response = self.client.get(url)
+        self.assertEqual(200, response.status_code)
