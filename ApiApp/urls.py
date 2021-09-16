@@ -4,9 +4,9 @@ from . import views
 
 app_name = 'ApiApp'
 urlpatterns = [
-    path('users/', views.UserList.as_view()),
+    path('users/', views.UserList.as_view(), name='users'),
     path('users/<int:pk>/', views.UserDetail.as_view()),
-    path('tasks/', views.PostList.as_view()),
+    path('tasks/', views.PostList.as_view(), name='tasks'),
     path('tasks/<int:pk>/', views.PostDetail.as_view()),
 ]
 

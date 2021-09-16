@@ -14,25 +14,46 @@
 </head>
 <body>
 
-<nav class="navbar navbar-secondary bg-secondary">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><a class="nav-link" href="{% url 'ToDoApp:index' %}">My To Do</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'ToDoApp:users' %}">Authors</a></li>
-        </ul>
-
-        {% if user.is_authenticated %}
-            Привет {{ user.username }}
-            <ul class="nav navbar-nav navbar-right">
-                <li><<a href="{% url 'logout' %}">Logout</a></li>
+        <a class="navbar-brand" href="{% url 'ToDoApp:users' %}">Authors</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'ToDoApp:index' %}">My To Do</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Rest Api
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/admin">Admin panel</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ApiApp:users' %}">Rest Api Users</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ApiApp:tasks' %}">Rest Api Tasks</a></li>
+                        <li><a class="dropdown-item" href="/swagger">Swagger</a></li>
+                        <li><a class="dropdown-item" href="/redoc">Redoc</a></li>
+                    </ul>
+                </li>
             </ul>
-        {% else %}
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="{% url 'AuthorizationApp:register' %}">Sign Up</a></li>
-                <li><<a href="{% url 'login' %}">Login</a></li>
-            </ul>
-        {% endif %}
+
+            {% if user.is_authenticated %}
+                Привет {{ user.username }}!!!
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                </ul>
+            {% else %}
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'AuthorizationApp:register' %}">Sign Up</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                </ul>
+            {% endif %}
+        </div>
     </div>
 </nav>
 
