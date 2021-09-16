@@ -1,41 +1,46 @@
 {% extends 'base.html' %}
 
-{% block title %}{% endblock %}
+{% block title %}My To Do{% endblock %}
 
 {% block content %}
-    <div class="header_container">
-    <h3>{{ header }}</h3>
-    </div>
-{% if user.is_authenticated %}
-    <form method="post">
-        {% csrf_token %}
-        {{ form.task_title }}
-        <button type="submit">Добавить</button>
-        <br>
-        {% if tasks %}
-            {% for item in tasks %}
-                {% if item.task_complete %}
 
-                    <tr>
-                        <a href="{% url 'ToDoApp:uncross' item.id %}"><s>{{ item.task_title }}</s></a>
-                        <a href="{% url 'ToDoApp:delete' item.id %}">Delete</a>
-                        <a href="{% url 'ToDoApp:edit' item.id %}">Edit</a><br>
-                    </tr>
+    <h3 class="head_text">{{ header }}</h3>
+
+    <div class="content_container">
+        {% if user.is_authenticated %}
+            <div class="form_container">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.task_title }}
+                    <button type="submit">Добавить</button>
+                    <br>
+                </form>
+            </div>
+            <div class="">
+                {% if tasks %}
+                    {% for item in tasks %}
+                        {% if item.task_complete %}
+                            <tr>
+                                <a class="ToDo_text"
+                                   href="{% url 'ToDoApp:uncross' item.id %}"><s>{{ item.task_title }}</s></a>
+                                <a href="{% url 'ToDoApp:edit' item.id %}"><small>Edit</small></a>
+                                <a href="{% url 'ToDoApp:delete' item.id %}"><small>Delete</small></a><br>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <a class="ToDo_text"
+                                   href="{% url 'ToDoApp:cross_off' item.id %}">{{ item.task_title }}</a>
+                                <a href="{% url 'ToDoApp:edit' item.id %}"><small>Edit</small></a>
+                                <a href="{% url 'ToDoApp:delete' item.id %}"><small>Delete</small></a><br>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
                 {% else %}
-                    <tr>
-                        <a href="{% url 'ToDoApp:cross_off' item.id %}">{{ item.task_title }}</a>
-                        <a href="{% url 'ToDoApp:delete' item.id %}">Delete</a>
-                        <a href="{% url 'ToDoApp:edit' item.id %}">Edit</a><br>
-
-                    </tr>
+                    Заметки не найдены
                 {% endif %}
-
-            {% endfor %}
+            </div>
         {% else %}
-            Заметки не найдены
+            Зайдите пожалуйста
         {% endif %}
-    </form>
-{% else %}
-    Зайдите пожалуйста
-{% endif %}
+    </div>
 {% endblock %}

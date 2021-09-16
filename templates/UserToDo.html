@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %}{% endblock %}
+{% block title %}{{ header }} To Do{% endblock %}
 
 {% block content %}
-    <h3>{{ header }}</h3>
+
+    <h3 class="head_text">{{ header }}</h3>
+
+    <div class="content_container">
         {% if tasks %}
             {% for item in tasks %}
                 {% if item.task_complete %}
@@ -19,5 +22,5 @@
         {% else %}
             Заметки не найдены
         {% endif %}
-
+    </div>
 {% endblock %}

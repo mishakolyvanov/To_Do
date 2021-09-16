@@ -93,7 +93,7 @@ def users(request):
     authors = author.objects.all()
     context = {
         'authors': authors,
-        'header': 'Users'
+        'header': 'Authors'
     }
     return render(request, 'Users.html', context)
 

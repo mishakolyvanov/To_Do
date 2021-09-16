@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 
-{% block title %}{% endblock %}
+{% block title %}Authors{% endblock %}
 
 {% block content %}
-    <h3>{{ header }}</h3>
+    <h3 class="head_text">{{ header }}</h3>
 
-    {% for item in authors %}
-        <a href="{% url 'ToDoApp:users_ToDo' item %}">{{ item }}</a><br>
-    {% endfor %}
+    <div class="content_container">
+        {% for item in authors %}
+            <a href="{% url 'ToDoApp:users_ToDo' item %}">{{ item }}</a><br>
+        {% endfor %}
+    </div>
 {% endblock %}
