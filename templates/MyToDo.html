@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}My To Do{% endblock %}
+
+{% block content %}
+
+    <h3 class="head_text">{{ header }}</h3>
+
+    <div class="content_container">
+        {% if user.is_authenticated %}
+            <div class="form_container">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.task_title }}
+                    <button type="submit">Добавить</button>
+                    <br>
+                </form>
+            </div>
+            <div class="">
+                {% if tasks %}
+                    {% for item in tasks %}
+                        {% if item.task_complete %}
+                            <tr>
+                                <a class="ToDo_text"
+                                   href="{% url 'ToDoApp:uncross' item.id %}"><s>{{ item.task_title }}</s></a>
+                                <a href="{% url 'ToDoApp:edit' item.id %}"><small>Edit</small></a>
+                                <a href="{% url 'ToDoApp:delete' item.id %}"><small>Delete</small></a><br>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <a class="ToDo_text"
+                                   href="{% url 'ToDoApp:cross_off' item.id %}">{{ item.task_title }}</a>
+                                <a href="{% url 'ToDoApp:edit' item.id %}"><small>Edit</small></a>
+                                <a href="{% url 'ToDoApp:delete' item.id %}"><small>Delete</small></a><br>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    Заметки не найдены
+                {% endif %}
+            </div>
+        {% else %}
+            Зайдите пожалуйста
+        {% endif %}
+    </div>
+{% endblock %}

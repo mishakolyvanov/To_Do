@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ header }}{% endblock %}
+
+{% block content %}
+
+    <h3 class="head_text">{{ header }}</h3>
+
+    <div class="content_container">
+        {% if tasks %}
+            {% for item in tasks %}
+                {% if item.task_complete %}
+                    <tr>
+                        <s>{{ item.task_title }}</s><br>
+                    </tr>
+                {% else %}
+                    <tr>
+                        {{ item.task_title }}<br>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            Заметки не найдены
+        {% endif %}
+    </div>
+{% endblock %}

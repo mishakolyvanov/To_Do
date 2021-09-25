@@ -1,0 +1,22 @@
+.content_container{
+    text-align: center;
+    font-size: 110%
+}
+
+.head_text{
+    margin: 2% 2% 2% 2%;
+    text-align: center;
+}
+
+.form_container{
+    margin: 2% 2% 2% 2%;
+}
+
+.ToDo_text{
+    color: #000000;
+    text-decoration: none;
+}
+
+.registration_container{
+    margin: 2% 10% 2% 10%;
+}

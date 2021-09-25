@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit To Do{% endblock %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+
+        <h3 class="head_text">Edit To Do</h3>
+
+        <div class="content_container">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.task_complete }}
+                {{ form.task_title }}
+                <button type="submit">Сохранить</button>
+                <br>
+            </form>
+        </div>
+    {% else %}
+        Зайдите пожалуйста
+    {% endif %}
+{% endblock %}
